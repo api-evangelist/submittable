@@ -1,0 +1,109 @@
+# Submittable (submittable)
+
+Submittable is a submission management, grants, and applications platform used by foundations, nonprofits, corporations, and governments to collect, review, and manage forms, applications, submissions, and awards. It exposes a real, documented **public REST API (v4)** at `https://submittable-api.submittable.com` with read-and-write access to account data — submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/submittable/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/submittable/refs/heads/main/apis.yml)
+
+## Access Model
+
+The Submittable API is **real and documented, but account-gated**:
+
+- **You need a Submittable account.** API access is enabled per account under **More > Integrations > API Access**, which issues an access token.
+- **Authentication is HTTP Basic Auth.** The access token is sent as the **password** portion of the Basic Authentication header on every call.
+- **Current version is v4** (`/v4`), with legacy **v3** (`/v3`) still reachable. In v4, submission and label identifiers are **GUIDs**, list endpoints page with **continuation tokens**, and the old v3 `requests`/`responses` endpoints are consolidated into v4 **entries**.
+- **Rate limits:** roughly **10 transactions/second** and **10,000 transactions/hour**.
+- The interactive v4 reference is served as a JavaScript single-page app. Live probing confirms the surface exists — `GET https://submittable-api.submittable.com/v4/submissions` returns **HTTP 401** without credentials.
+
+Because the reference is account-gated and Submittable does not publish a machine-readable OpenAPI, the OpenAPI in this repo is **honestly modeled** from the documented resource groups. Paths for submissions, entries, projects, organizations/team, and submissions/team/assignment are drawn from Submittable's public docs; the remaining paths are modeled to reflect the named resource groups and are marked **endpointsModeled** in `review.yml`.
+
+## Tags
+
+- Submission Management
+- Grants Management
+- Applications
+- Forms
+- Nonprofit
+- Corporate Social Responsibility
+- Workflow
+
+## Timestamps
+
+- **Created:** 2026-07-05
+- **Modified:** 2026-07-05
+
+## APIs
+
+### Submittable Submissions API
+
+List, retrieve, and update submissions — the applications and entries people send to your projects. Filter by project, status, label, or date; page with continuation tokens; read status, labels, assignments, and history.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Entries API
+
+Read the form-field entries (answers) captured on submissions. In v4 the legacy v3 requests/responses endpoints are consolidated into the entries endpoints.
+
+- **Human URL:** [https://submittable.help/en/articles/8563401-api-version-reference](https://submittable.help/en/articles/8563401-api-version-reference)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Projects and Forms API
+
+List, create, duplicate, and modify projects (the forms people apply through) and manage form types.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Users (Submitters) API
+
+Retrieve submitter information — the people who create accounts and send submissions to your projects.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Teams and Reviews API
+
+Administer organization team members and assign submissions to reviewers for evaluation.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Labels API
+
+Create and organize labels (tags) used to categorize and filter submissions.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+### Submittable Funds and Payments API
+
+Manage funds (budgets and grant distributions) and retrieve payment records filterable by period.
+
+- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
+- **Base URL:** `https://submittable-api.submittable.com/v4`
+
+## Artifacts
+
+- [OpenAPI](openapi/submittable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/submittable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/submittable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Plans](plans/submittable-plans-pricing.yml)
+- [Rate Limits](rate-limits/submittable-rate-limits.yml)
+- [Fin Ops](finops/submittable-finops.yml)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/company/submittable)
+- [Website](https://www.submittable.com)
+- [Documentation](https://submittable-api.submittable.com/docs/v4/index.html)
+- [Support Documentation](https://submittable.help/en/collections/1728753-integrations-api)
+- [Pricing](https://www.submittable.com/pricing/)
+
+## Pricing
+
+Submittable pricing is **quote-based** (contact sales). It is organized around bundleable products — Grant and Application Management and a Corporate Social Responsibility (CSR) platform — plus an **Enterprise** offering. No public per-seat list price is published; API access is included with the platform (not billed as a separate metered product) and governed by the transaction rate limits above.
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

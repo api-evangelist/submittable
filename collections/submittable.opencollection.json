@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Submittable API (v4)",
+    "version": "4.0",
+    "description": "Read-and-write access to a Submittable account - submissions, form-field entries, projects/forms, submitters, team members and review assignments, labels, funds and payments, and message attachments. Base URL https://submittable-api.submittable.com/v4. HTTP Basic Auth with the account access token as the password. Some shapes are modeled because the reference is account-gated."
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{accountEmail}}",
+      "password": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Submissions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List submissions.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/submissions",
+            "params": [
+              { "name": "projectId", "value": "", "type": "query", "description": "Filter to a single project." },
+              { "name": "status", "value": "", "type": "query", "description": "Filter by submission status." },
+              { "name": "continuationToken", "value": "", "type": "query", "description": "Token for the next page." }
+            ]
+          },
+          "docs": "List submissions, filterable by project/status, paged with a continuation token."
+        },
+        {
+          "info": { "name": "Get a submission.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/submissions/:submissionId",
+            "params": [ { "name": "submissionId", "value": "", "type": "path", "description": "The GUID of the submission." } ]
+          },
+          "docs": "Retrieve a single submission by GUID."
+        },
+        {
+          "info": { "name": "Update a submission.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://submittable-api.submittable.com/v4/submissions/:submissionId",
+            "params": [ { "name": "submissionId", "value": "", "type": "path", "description": "The GUID of the submission." } ],
+            "body": { "type": "json", "data": "{\n  \"status\": \"accepted\",\n  \"labelIds\": []\n}" }
+          },
+          "docs": "Update mutable fields on a submission, such as status or labels."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Entries", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List entries.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/entries" },
+          "docs": "List form-field entries (v3 requests/responses consolidated into v4 entries)."
+        },
+        {
+          "info": { "name": "Get an entry.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/entries/:entryId",
+            "params": [ { "name": "entryId", "value": "", "type": "path", "description": "The entry identifier." } ]
+          },
+          "docs": "Retrieve a single form-field entry."
+        },
+        {
+          "info": { "name": "Get entries for a submission.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/entries/submissions/:submissionId",
+            "params": [ { "name": "submissionId", "value": "", "type": "path", "description": "The GUID of the submission." } ]
+          },
+          "docs": "Retrieve the form-field entries captured on a specific submission."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Projects", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List projects.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/projects" },
+          "docs": "List the projects (forms/programs) in the account."
+        },
+        {
+          "info": { "name": "Create a project.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://submittable-api.submittable.com/v4/projects",
+            "body": { "type": "json", "data": "{\n  \"name\": \"New Program\",\n  \"status\": \"open\"\n}" }
+          },
+          "docs": "Create a new project (form/program)."
+        },
+        {
+          "info": { "name": "Get a project.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/projects/:projectId",
+            "params": [ { "name": "projectId", "value": "", "type": "path", "description": "The GUID of the project." } ]
+          },
+          "docs": "Retrieve a single project by GUID."
+        },
+        {
+          "info": { "name": "Update a project.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://submittable-api.submittable.com/v4/projects/:projectId",
+            "params": [ { "name": "projectId", "value": "", "type": "path", "description": "The GUID of the project." } ],
+            "body": { "type": "json", "data": "{\n  \"name\": \"Renamed Program\",\n  \"status\": \"closed\"\n}" }
+          },
+          "docs": "Modify a project, including duplicating or updating its settings."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List submitters.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/users" },
+          "docs": "Retrieve submitters - the people who send submissions to your projects."
+        },
+        {
+          "info": { "name": "Get a submitter.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/users/:userId",
+            "params": [ { "name": "userId", "value": "", "type": "path", "description": "The GUID of the submitter." } ]
+          },
+          "docs": "Retrieve a single submitter's profile."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Teams and Reviews", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List team members.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/organizations/team" },
+          "docs": "List the organization's team members (staff and reviewers)."
+        },
+        {
+          "info": { "name": "Assign a submission to a reviewer.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://submittable-api.submittable.com/v4/submissions/team/assignment",
+            "body": { "type": "json", "data": "{\n  \"submissionId\": \"\",\n  \"assigneeId\": \"\"\n}" }
+          },
+          "docs": "Create a review assignment routing a submission to a team member."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Labels", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List labels.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/labels" },
+          "docs": "List the labels (tags) defined in the account."
+        },
+        {
+          "info": { "name": "Create a label.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://submittable-api.submittable.com/v4/labels",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Shortlist\",\n  \"color\": \"#3098d8\"\n}" }
+          },
+          "docs": "Create a new label used to categorize submissions."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Funds and Payments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List funds.", "type": "http" },
+          "http": { "method": "GET", "url": "https://submittable-api.submittable.com/v4/funds" },
+          "docs": "List the funds (budgets) used to award and disburse grants."
+        },
+        {
+          "info": { "name": "List payments.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/payments",
+            "params": [
+              { "name": "year", "value": "", "type": "query", "description": "Filter by year." },
+              { "name": "month", "value": "", "type": "query", "description": "Filter by month." }
+            ]
+          },
+          "docs": "Retrieve payment records, filterable by year and month."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Messaging", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get message attachments.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/messaging/:messageId/files",
+            "params": [ { "name": "messageId", "value": "", "type": "path", "description": "The GUID of the message." } ]
+          },
+          "docs": "Retrieve the files attached to a message."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+aid: submittable
+name: Submittable
+review:
+  question: Does Submittable expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Submittable's public developer surface is
+    a request/response REST API (v4, base https://submittable-api.submittable.com)
+    authenticated with HTTP Basic Auth. There is no documented server-push
+    transport (WebSocket or SSE) on Submittable's own API to model. Event-style
+    integration is handled outbound via Zapier and integration hooks, not a
+    persistent bidirectional socket, so there is no WebSocket surface to
+    describe in AsyncAPI.
+findings:
+  summary: |
+    Submittable does not publish a documented public WebSocket API. Submittable
+    is a submission management, grants, and applications platform. Its public
+    API is REST over HTTPS: the current version is v4 (base
+    https://submittable-api.submittable.com/v4, with legacy v3 still reachable),
+    documented at submittable-api.submittable.com/docs/v4/index.html and in the
+    Submittable Help Center. Authentication is HTTP Basic - the account access
+    token is sent as the password portion of the Basic Auth header, enabled per
+    account under More > Integrations > API Access. The API is read-and-write
+    and throttled at ~10 transactions/second and ~10,000 transactions/hour. It
+    covers submissions, form-field entries, projects/forms, submitters (users),
+    labels, organization team members and review assignments, funds and
+    payments, and message attachments. In v4, submission and label identifiers
+    are GUIDs and list endpoints page with continuation tokens. No realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    documented on Submittable's own API.
+  accessModel: |
+    Real, documented public REST API, but account-gated: you must have a
+    Submittable account and enable API access under More > Integrations > API
+    Access to obtain the access token. The interactive v4 reference is served as
+    a JavaScript single-page app; live probing confirms endpoints exist
+    (GET https://submittable-api.submittable.com/v4/submissions returns HTTP 401
+    without credentials, and the v3 equivalent likewise returns 401). Because the
+    reference is account-gated and no machine-readable OpenAPI is published,
+    exact request/response schemas in this repo's OpenAPI are honestly modeled
+    from the documented resource groups and marked endpointsModeled.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://submittable-api.submittable.com/v4
+      documented: true
+      note: Current v4 API. Read-and-write, HTTP Basic Auth (access token as password).
+    - protocol: REST
+      scheme: https
+      baseURL: https://submittable-api.submittable.com/v3
+      documented: true
+      note: Legacy v3 API, still reachable; v3 requests/responses consolidated into v4 entries.
+    - protocol: Integration
+      scheme: https
+      documented: true
+      note: Outbound integration via Zapier and integration hooks. Not a WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Submittable's API reference or help center as of the review date.
+  endpointsModeled: true
+  endpointsModeledNote: |
+    The endpoints below are modeled from Submittable's documented resource
+    groups (Submissions, Entries, Projects, Users/Submitters, Organizations/Team,
+    Assignments, Labels, Funds, Payments, Messaging) and version-reference notes.
+    Paths shown for submissions, entries, projects, organizations/team, and
+    submissions/team/assignment are drawn from Submittable's public docs; the
+    others are honestly modeled to reflect the named resource groups and were not
+    each individually verified against the account-gated reference.
+  endpointsConfirmedRest:
+    - GET    https://submittable-api.submittable.com/v4/submissions
+    - GET    https://submittable-api.submittable.com/v4/submissions/{submissionId}
+    - PATCH  https://submittable-api.submittable.com/v4/submissions/{submissionId}
+    - GET    https://submittable-api.submittable.com/v4/entries
+    - GET    https://submittable-api.submittable.com/v4/entries/{entryId}
+    - GET    https://submittable-api.submittable.com/v4/entries/submissions/{submissionId}
+    - GET    https://submittable-api.submittable.com/v4/projects
+    - GET    https://submittable-api.submittable.com/v4/projects/{projectId}
+    - PATCH  https://submittable-api.submittable.com/v4/projects/{projectId}
+    - GET    https://submittable-api.submittable.com/v4/organizations/team
+    - POST   https://submittable-api.submittable.com/v4/submissions/team/assignment
+  endpointsModeledRest:
+    - GET    https://submittable-api.submittable.com/v4/users
+    - GET    https://submittable-api.submittable.com/v4/users/{userId}
+    - GET    https://submittable-api.submittable.com/v4/labels
+    - POST   https://submittable-api.submittable.com/v4/labels
+    - GET    https://submittable-api.submittable.com/v4/funds
+    - GET    https://submittable-api.submittable.com/v4/payments
+    - GET    https://submittable-api.submittable.com/v4/messaging/{messageId}/files
+sources:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+    note: Interactive v4 API reference (JavaScript SPA). REST, HTTP Basic Auth. No WebSocket mentioned.
+  - url: https://submittable.help/en/articles/905022-does-submittable-have-an-api
+    type: Documentation
+    note: Confirms the API exists, read-and-write, Basic Auth, rate limits 10/sec and 10,000/hour, enable under More > Integrations > API Access.
+  - url: https://submittable.help/en/articles/8563401-api-version-reference
+    type: Documentation
+    note: v4 vs v3; v3 requests/responses consolidated into v4 entries; GUID identifiers; continuation-token pagination; lists projects, submissions, organizations/team, submissions/team/assignment paths.
+  - url: https://submittable.help/en/articles/5504544-tools-and-terms-for-using-submittable-s-api
+    type: Documentation
+    note: Resource groups (Forms, Funds, Integrations/Zapier, Labels, Messaging, Organizations, Projects, Submissions, Users); Basic Auth; rate limits.
+  - url: https://www.submittable.com/pricing/
+    type: Pricing
+    note: Quote-based products (Grants/Applications, CSR) plus Enterprise; contact-sales, no public list price.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on Submittable's own API - it is a
+    request/response REST API (v4) with HTTP Basic Auth and outbound Zapier/hook
+    integrations. No AsyncAPI document was created because there is no
+    server-push transport to model. The apis.yml catalogs the documented and
+    honestly-modeled REST resource groups, with the OpenAPI marked
+    endpointsModeled because the reference is account-gated.

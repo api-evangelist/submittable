@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Submittable
+providerId: submittable
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Submission Management
+- Grants Management
+- Rate Limiting
+- Quotas
+description: >-
+  Submittable publishes explicit throttling for its API: roughly 10 transactions
+  per second and 10,000 transactions per hour. These are the two documented
+  constraints on API usage. List endpoints in v4 page with continuation tokens
+  rather than page numbers, which shapes how many transactions a full data pull
+  consumes. Clients that exceed the limits should expect throttling and back off.
+notes: >-
+  The per-second and per-hour caps are stated in Submittable's help
+  documentation. The exact HTTP status returned on throttling and any Retry-After
+  header are not documented publicly; 429 is assumed by convention. Verify during
+  reconciliation.
+sources:
+- https://submittable.help/en/articles/905022-does-submittable-have-an-api
+- https://submittable.help/en/articles/5504544-tools-and-terms-for-using-submittable-s-api
+- https://submittable-api.submittable.com/docs/v4/index.html
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-Second Transactions
+  scope: account
+  metric: transactions
+  limit: 10 per second
+  notes: Documented maximum sustained request rate for the API.
+- name: Per-Hour Transactions
+  scope: account
+  metric: transactions
+  limit: 10000 per hour
+  notes: Documented hourly transaction ceiling for the API.
+policies:
+- name: Pagination
+  description: v4 list endpoints return a continuation token; fetch subsequent pages by passing it back, which spreads a full export across multiple transactions.
+- name: Backoff Strategy
+  description: On throttling, implement exponential backoff with jitter and stay within the 10/sec and 10,000/hour ceilings.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

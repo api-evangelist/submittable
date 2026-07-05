@@ -1,0 +1,107 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Submittable
+providerId: submittable
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Submission Management
+- Grants Management
+- Applications
+- Plans
+- Enterprise
+description: >-
+  Submittable does not publish per-seat, self-serve list prices on its public
+  pricing page. Pricing is quote-based and organized around bundleable products
+  - Grant and Application Management and a Corporate Social Responsibility (CSR)
+  platform - plus an Enterprise offering with enhanced features, support, and
+  services. Buyers select individual products or bundle them, then engage Sales
+  ("Book a Meeting" / "Talk to Sales") for a quote. Third-party sources have
+  historically cited annual plans in the low-thousands-of-dollars-per-month
+  range scaling by user count with a custom Enterprise tier, but Submittable
+  does not confirm fixed figures publicly, so no numeric list price is asserted
+  here. API access is not sold as a separate metered product; it is enabled per
+  account under More > Integrations > API Access and governed by the platform's
+  transaction rate limits rather than usage-based API billing.
+notes: >-
+  Verify current products, bundles, and any tier that gates API access directly
+  with Submittable Sales during reconciliation. Figures circulated by
+  third-party review sites are unconfirmed and intentionally not encoded as
+  plan prices.
+sources:
+- https://www.submittable.com/pricing/
+- https://www.submittable.com/
+- https://submittable.help/en/articles/905022-does-submittable-have-an-api
+plans:
+- id: submittable-grants-applications
+  name: Grant and Application Management
+  type: quote
+  description: >-
+    Submittable's core submission, grants, and application management product
+    for collecting, reviewing, and awarding across forms and workflows.
+    Quote-based; contact Sales.
+  entries:
+  - label: Subscription
+    name: grants_applications_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (quote-based)
+    userMultiplied: true
+  elements:
+  - name: Forms and Applications
+  - name: Review Workflows
+  - name: Awards and Payments
+  - name: API Access
+- id: submittable-csr
+  name: Corporate Social Responsibility (CSR)
+  type: quote
+  description: >-
+    CSR platform for corporate giving, employee engagement, volunteering, and
+    grantmaking programs. Quote-based; contact Sales.
+  entries:
+  - label: Subscription
+    name: csr_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (quote-based)
+    userMultiplied: true
+  elements:
+  - name: Corporate Giving
+  - name: Employee Engagement
+  - name: Grantmaking
+  - name: API Access
+- id: submittable-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Enterprise-grade features, security, support, and services for large
+    organizations with complex programs. Custom pricing; contact Sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Dedicated Account Management
+  - name: Enhanced Security
+  - name: Personalized Onboarding
+  - name: SLAs and Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

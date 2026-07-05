@@ -1,0 +1,203 @@
+aid: submittable
+url: https://raw.githubusercontent.com/api-evangelist/submittable/refs/heads/main/apis.yml
+name: Submittable
+kind: company
+description: Submittable is a submission management, grants, and applications
+  platform used by foundations, nonprofits, corporations, and governments to
+  collect, review, and manage forms, applications, submissions, and awards. Its
+  public REST API (v4, base https://submittable-api.submittable.com) provides
+  read-and-write, programmatic access to account data - submissions and their
+  form-field entries, projects and forms, submitters (users), labels, review
+  team members and assignments, funds and payment distributions, and message
+  attachments. The API uses HTTP Basic Authentication (an account access token
+  sent as the password) and is throttled at roughly 10 transactions per second
+  and 10,000 transactions per hour. API access is enabled per account under
+  More > Integrations > API Access, and Submittable pricing is quote-based
+  (bundled Grant/Application Management and Corporate Social Responsibility
+  products, plus Enterprise) via contact-sales.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Submission Management
+- Grants Management
+- Applications
+- Forms
+- Nonprofit
+- Corporate Social Responsibility
+- Workflow
+created: '2026-07-05'
+modified: '2026-07-05'
+specificationVersion: '0.19'
+apis:
+- aid: submittable:submittable-submissions-api
+  name: Submittable Submissions API
+  tags:
+  - Submissions
+  - Applications
+  - Workflow
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable.help/en/articles/905022-does-submittable-have-an-api
+    type: Documentation
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: List, retrieve, and update submissions - the applications and
+    entries people send to your projects. Filter by project, status, label, or
+    date, page through results with continuation tokens, and read submission
+    status, labels, assignments, and history. Submission identifiers are GUIDs
+    in v4.
+- aid: submittable:submittable-entries-api
+  name: Submittable Entries API
+  tags:
+  - Entries
+  - Form Responses
+  - Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable.help/en/articles/8563401-api-version-reference
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable.help/en/articles/8563401-api-version-reference
+    type: Documentation
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: Read the form-field entries (answers) captured on submissions.
+    In v4 the legacy v3 requests/responses endpoints are consolidated into the
+    entries endpoints, which return the individual field values submitted
+    against a project's form, including entries for a specific submission.
+- aid: submittable:submittable-projects-forms-api
+  name: Submittable Projects and Forms API
+  tags:
+  - Projects
+  - Forms
+  - Configuration
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: List, create, duplicate, and modify projects (the forms people
+    apply through) and manage form types. Projects define the intake form,
+    workflow stages, and settings for a call for submissions or grant program.
+- aid: submittable:submittable-users-api
+  name: Submittable Users (Submitters) API
+  tags:
+  - Users
+  - Submitters
+  - People
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: Retrieve submitter information - the people who create accounts
+    and send submissions to your projects - including profile details and the
+    submissions associated with a given user.
+- aid: submittable:submittable-teams-reviews-api
+  name: Submittable Teams and Reviews API
+  tags:
+  - Teams
+  - Reviews
+  - Assignments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: Administer organization team members and assign submissions to
+    reviewers. List team members, and create or manage the review assignments
+    that route submissions to the staff and reviewers who evaluate them.
+- aid: submittable:submittable-labels-api
+  name: Submittable Labels API
+  tags:
+  - Labels
+  - Tags
+  - Organization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: Create and organize labels (tags) used to categorize and filter
+    submissions across a project's workflow. Label identifiers are GUIDs in v4.
+- aid: submittable:submittable-funds-api
+  name: Submittable Funds and Payments API
+  tags:
+  - Funds
+  - Payments
+  - Grants
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://submittable-api.submittable.com/docs/v4/index.html
+  baseURL: https://submittable-api.submittable.com/v4
+  properties:
+  - url: https://submittable-api.submittable.com/docs/v4/index.html
+    type: APIReference
+  - url: openapi/submittable-openapi.yml
+    type: OpenAPI
+  - url: collections/submittable.postman_collection.json
+    type: PostmanCollection
+  - url: collections/submittable.opencollection.json
+    type: OpenCollection
+  description: Manage funds - organizational budgets and grant distributions -
+    and retrieve payment records. Read payments filterable by period, and work
+    with the funds used to award and disburse grants to recipients.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/submittable
+- type: Website
+  url: https://www.submittable.com
+- type: Documentation
+  url: https://submittable-api.submittable.com/docs/v4/index.html
+- type: SupportDocumentation
+  url: https://submittable.help/en/collections/1728753-integrations-api
+- type: Plans
+  url: plans/submittable-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/submittable-rate-limits.yml
+- type: FinOps
+  url: finops/submittable-finops.yml
+- type: Pricing
+  url: https://www.submittable.com/pricing/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

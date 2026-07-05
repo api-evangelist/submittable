@@ -1,0 +1,237 @@
+{
+  "info": {
+    "name": "Submittable API (v4)",
+    "description": "Read-and-write access to a Submittable account - submissions, form-field entries, projects/forms, submitters (users), team members and review assignments, labels, funds and payments, and message attachments. Base URL: https://submittable-api.submittable.com/v4. Authentication is HTTP Basic Auth with your account access token sent as the password (enable under More > Integrations > API Access). Throttled at ~10 transactions/second and ~10,000/hour. Some request/response shapes are modeled because the reference is account-gated (see review.yml, endpointsModeled).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{accountEmail}}", "type": "string" },
+      { "key": "password", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://submittable-api.submittable.com/v4", "type": "string" },
+    { "key": "accountEmail", "value": "", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Submissions",
+      "item": [
+        {
+          "name": "List submissions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/submissions?continuationToken=", "host": ["{{baseUrl}}"], "path": ["submissions"], "query": [{ "key": "projectId", "value": "", "disabled": true }, { "key": "status", "value": "", "disabled": true }, { "key": "continuationToken", "value": "" }] },
+            "description": "List submissions, filterable by project/status and paged with a continuation token."
+          }
+        },
+        {
+          "name": "Get a submission",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/submissions/:submissionId", "host": ["{{baseUrl}}"], "path": ["submissions", ":submissionId"], "variable": [{ "key": "submissionId", "value": "" }] },
+            "description": "Retrieve a single submission by GUID."
+          }
+        },
+        {
+          "name": "Update a submission",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"accepted\",\n  \"labelIds\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/submissions/:submissionId", "host": ["{{baseUrl}}"], "path": ["submissions", ":submissionId"], "variable": [{ "key": "submissionId", "value": "" }] },
+            "description": "Update mutable fields on a submission, such as status or labels."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entries",
+      "item": [
+        {
+          "name": "List entries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/entries", "host": ["{{baseUrl}}"], "path": ["entries"] },
+            "description": "List form-field entries (v3 requests/responses consolidated into v4 entries)."
+          }
+        },
+        {
+          "name": "Get an entry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/entries/:entryId", "host": ["{{baseUrl}}"], "path": ["entries", ":entryId"], "variable": [{ "key": "entryId", "value": "" }] },
+            "description": "Retrieve a single form-field entry."
+          }
+        },
+        {
+          "name": "Get entries for a submission",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/entries/submissions/:submissionId", "host": ["{{baseUrl}}"], "path": ["entries", "submissions", ":submissionId"], "variable": [{ "key": "submissionId", "value": "" }] },
+            "description": "Retrieve the form-field entries captured on a specific submission."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/projects", "host": ["{{baseUrl}}"], "path": ["projects"] },
+            "description": "List the projects (forms/programs) in the account."
+          }
+        },
+        {
+          "name": "Create a project",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"New Program\",\n  \"status\": \"open\"\n}" },
+            "url": { "raw": "{{baseUrl}}/projects", "host": ["{{baseUrl}}"], "path": ["projects"] },
+            "description": "Create a new project (form/program)."
+          }
+        },
+        {
+          "name": "Get a project",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/projects/:projectId", "host": ["{{baseUrl}}"], "path": ["projects", ":projectId"], "variable": [{ "key": "projectId", "value": "" }] },
+            "description": "Retrieve a single project by GUID."
+          }
+        },
+        {
+          "name": "Update a project",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Renamed Program\",\n  \"status\": \"closed\"\n}" },
+            "url": { "raw": "{{baseUrl}}/projects/:projectId", "host": ["{{baseUrl}}"], "path": ["projects", ":projectId"], "variable": [{ "key": "projectId", "value": "" }] },
+            "description": "Modify a project, including duplicating or updating its settings."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List submitters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+            "description": "Retrieve submitters - the people who send submissions to your projects."
+          }
+        },
+        {
+          "name": "Get a submitter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/users/:userId", "host": ["{{baseUrl}}"], "path": ["users", ":userId"], "variable": [{ "key": "userId", "value": "" }] },
+            "description": "Retrieve a single submitter's profile."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams and Reviews",
+      "item": [
+        {
+          "name": "List team members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/organizations/team", "host": ["{{baseUrl}}"], "path": ["organizations", "team"] },
+            "description": "List the organization's team members (staff and reviewers)."
+          }
+        },
+        {
+          "name": "Assign a submission to a reviewer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"submissionId\": \"\",\n  \"assigneeId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/submissions/team/assignment", "host": ["{{baseUrl}}"], "path": ["submissions", "team", "assignment"] },
+            "description": "Create a review assignment routing a submission to a team member."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Labels",
+      "item": [
+        {
+          "name": "List labels",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/labels", "host": ["{{baseUrl}}"], "path": ["labels"] },
+            "description": "List the labels (tags) defined in the account."
+          }
+        },
+        {
+          "name": "Create a label",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Shortlist\",\n  \"color\": \"#3098d8\"\n}" },
+            "url": { "raw": "{{baseUrl}}/labels", "host": ["{{baseUrl}}"], "path": ["labels"] },
+            "description": "Create a new label used to categorize submissions."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Funds and Payments",
+      "item": [
+        {
+          "name": "List funds",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/funds", "host": ["{{baseUrl}}"], "path": ["funds"] },
+            "description": "List the funds (budgets) used to award and disburse grants."
+          }
+        },
+        {
+          "name": "List payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/payments?year=&month=", "host": ["{{baseUrl}}"], "path": ["payments"], "query": [{ "key": "year", "value": "" }, { "key": "month", "value": "" }] },
+            "description": "Retrieve payment records, filterable by year and month."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messaging",
+      "item": [
+        {
+          "name": "Get message attachments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/messaging/:messageId/files", "host": ["{{baseUrl}}"], "path": ["messaging", ":messageId", "files"], "variable": [{ "key": "messageId", "value": "" }] },
+            "description": "Retrieve the files attached to a message."
+          }
+        }
+      ]
+    }
+  ]
+}
