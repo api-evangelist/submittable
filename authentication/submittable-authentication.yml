@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/submittable-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication. Send your account access token as the password portion
+    of the Basic Auth header (the username may be left blank or set to your account email, per
+    Submittable's documentation).
+  sources:
+  - openapi/submittable-openapi.yml

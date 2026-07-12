@@ -182,6 +182,12 @@ apis:
     and retrieve payment records. Read payments filterable by period, and work
     with the funds used to award and disburse grants to recipients.
 common:
+- type: TrustCenter
+  url: security/submittable-trust-center.yml
+- type: DomainSecurity
+  url: security/submittable-domain-security.yml
+- type: Authentication
+  url: authentication/submittable-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/submittable
 - type: Website
