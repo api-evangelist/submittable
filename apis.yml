@@ -182,6 +182,8 @@ apis:
     and retrieve payment records. Read payments filterable by period, and work
     with the funds used to award and disburse grants to recipients.
 common:
+- type: AgenticAccess
+  url: agentic-access/submittable-agentic-access.yml
 - type: TrustCenter
   url: security/submittable-trust-center.yml
 - type: DomainSecurity
