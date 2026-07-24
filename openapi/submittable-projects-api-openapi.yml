@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: Submittable Assignments Projects API
+  description: 'The Submittable API (v4) provides read-and-write, programmatic access to a Submittable account''s data. Submittable is a submission management, grants, and applications platform. This API exposes submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. Authentication uses HTTP Basic Authentication, where an account access token (found under More > Integrations > API Access) is sent as the password portion of the Basic Auth header. The API is throttled at roughly 10 transactions per second and 10,000 transactions per hour. In v4, submission and label identifiers are GUIDs and list endpoints page with continuation tokens rather than page numbers.
+
+    This description is modeled from Submittable''s public API reference and help documentation. Endpoint paths, parameters, and schemas are honestly modeled to reflect the documented resource groups; some request/response shapes are generalized where the underlying account-gated reference does not publish a machine-readable specification. Endpoints are marked endpointsModeled where exact shapes were not confirmable without an authenticated account.'
+  version: '4.0'
+  contact:
+    name: Submittable
+    url: https://www.submittable.com
+  x-endpointsModeled: true
+servers:
+- url: https://submittable-api.submittable.com/v4
+  description: Submittable API v4 (current)
+- url: https://submittable-api.submittable.com/v3
+  description: Submittable API v3 (legacy)
+security:
+- basicAuth: []
+tags:
+- name: Projects
+  description: The forms/programs people apply through.
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      tags:
+      - Projects
+      summary: List projects
+      description: List the projects (forms/programs) in the account.
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createProject
+      tags:
+      - Projects
+      summary: Create a project
+      description: Create a new project (form/program).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201':
+          description: The created project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}:
+    parameters:
+    - name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getProject
+      tags:
+      - Projects
+      summary: Get a project
+      description: Retrieve a single project by GUID.
+      responses:
+        '200':
+          description: The requested project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateProject
+      tags:
+      - Projects
+      summary: Update a project
+      description: Modify a project, including duplicating or updating its settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '200':
+          description: The updated project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+        formId:
+          type: string
+          format: uuid
+    ProjectCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type: string
+          nullable: true
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type: integer
+          nullable: true
+    ProjectList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Project'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Send your account access token as the password portion of the Basic Auth header (the username may be left blank or set to your account email, per Submittable's documentation).

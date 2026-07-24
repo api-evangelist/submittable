@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Submittable Assignments Funds API
+  description: 'The Submittable API (v4) provides read-and-write, programmatic access to a Submittable account''s data. Submittable is a submission management, grants, and applications platform. This API exposes submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. Authentication uses HTTP Basic Authentication, where an account access token (found under More > Integrations > API Access) is sent as the password portion of the Basic Auth header. The API is throttled at roughly 10 transactions per second and 10,000 transactions per hour. In v4, submission and label identifiers are GUIDs and list endpoints page with continuation tokens rather than page numbers.
+
+    This description is modeled from Submittable''s public API reference and help documentation. Endpoint paths, parameters, and schemas are honestly modeled to reflect the documented resource groups; some request/response shapes are generalized where the underlying account-gated reference does not publish a machine-readable specification. Endpoints are marked endpointsModeled where exact shapes were not confirmable without an authenticated account.'
+  version: '4.0'
+  contact:
+    name: Submittable
+    url: https://www.submittable.com
+  x-endpointsModeled: true
+servers:
+- url: https://submittable-api.submittable.com/v4
+  description: Submittable API v4 (current)
+- url: https://submittable-api.submittable.com/v3
+  description: Submittable API v3 (legacy)
+security:
+- basicAuth: []
+tags:
+- name: Funds
+  description: Budgets and grant distributions.
+paths:
+  /funds:
+    get:
+      operationId: listFunds
+      tags:
+      - Funds
+      summary: List funds
+      description: List the funds (budgets) used to award and disburse grants.
+      responses:
+        '200':
+          description: A list of funds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Fund:
+      type: object
+      properties:
+        fundId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        balance:
+          type: number
+        currency:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type: string
+          nullable: true
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type: integer
+          nullable: true
+    FundList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Fund'
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Send your account access token as the password portion of the Basic Auth header (the username may be left blank or set to your account email, per Submittable's documentation).
