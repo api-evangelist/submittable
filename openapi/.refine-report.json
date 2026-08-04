@@ -1,0 +1,32 @@
+{
+  "provider": "submittable",
+  "sources": [
+    "submittable-assignments-api-openapi.yml",
+    "submittable-entries-api-openapi.yml",
+    "submittable-funds-api-openapi.yml",
+    "submittable-labels-api-openapi.yml",
+    "submittable-messaging-api-openapi.yml",
+    "submittable-payments-api-openapi.yml",
+    "submittable-projects-api-openapi.yml",
+    "submittable-submissions-api-openapi.yml",
+    "submittable-teams-api-openapi.yml",
+    "submittable-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "submittable-assignments-api-openapi.yml",
+    "submittable-entries-api-openapi.yml",
+    "submittable-funds-api-openapi.yml",
+    "submittable-labels-api-openapi.yml",
+    "submittable-messaging-api-openapi.yml",
+    "submittable-payments-api-openapi.yml",
+    "submittable-projects-api-openapi.yml",
+    "submittable-submissions-api-openapi.yml",
+    "submittable-teams-api-openapi.yml",
+    "submittable-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
