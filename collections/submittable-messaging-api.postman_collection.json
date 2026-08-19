@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "6d02ec74-d05c-4a04-aaee-7eeff1437601",
+      "name": "Messaging",
+      "description": {
+        "content": "Message attachments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bbbfc81a-e49d-4dff-a8dc-44d819d6760d",
+          "name": "Get message attachments",
+          "request": {
+            "name": "Get message attachments",
+            "description": {
+              "content": "Retrieve the files attached to a message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messaging",
+                ":messageId",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "messageId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63ad8262-ae64-4b7c-9d2c-ca0b766f99b9",
+              "name": "The attached files.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":messageId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"continuationToken\": \"string\",\n  \"totalCount\": 7761,\n  \"items\": [\n    {\n      \"fileId\": \"b1bb812f-8563-989c-fda7-53c662d7016d\",\n      \"fileName\": \"string\",\n      \"url\": \"http://TwlXirS.hgES8jl3U5RqaF3\",\n      \"contentType\": \"string\"\n    },\n    {\n      \"fileId\": \"a4116b29-c332-93b8-e713-44718b46b692\",\n      \"fileName\": \"string\",\n      \"url\": \"https://BdeSKG.xdaspe0vQGZsaT3v.14qp+UEo2iCj6DfQFtp0VLJh5kJPXrF\",\n      \"contentType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10e3e610-2762-4611-b88a-5bcb87e57e9d",
+              "name": "Authentication failed or was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":messageId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e904dab5-7512-4857-b537-5b864bc3323c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messaging",
+                    ":messageId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "messageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://submittable-api.submittable.com/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "614332e6-8ddb-45dd-9801-5146eec34dd8",
+    "name": "Submittable Assignments Messaging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Submittable API (v4) provides read-and-write, programmatic access to a Submittable account's data. Submittable is a submission management, grants, and applications platform. This API exposes submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. Authentication uses HTTP Basic Authentication, where an account access token (found under More > Integrations > API Access) is sent as the password portion of the Basic Auth header. The API is throttled at roughly 10 transactions per second and 10,000 transactions per hour. In v4, submission and label identifiers are GUIDs and list endpoints page with continuation tokens rather than page numbers.\nThis description is modeled from Submittable's public API reference and help documentation. Endpoint paths, parameters, and schemas are honestly modeled to reflect the documented resource groups; some request/response shapes are generalized where the underlying account-gated reference does not publish a machine-readable specification. Endpoints are marked endpointsModeled where exact shapes were not confirmable without an authenticated account.\n\nContact Support:\n Name: Submittable",
+      "type": "text/plain"
+    }
+  }
+}

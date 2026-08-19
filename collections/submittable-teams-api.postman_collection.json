@@ -1,0 +1,169 @@
+{
+  "item": [
+    {
+      "id": "3574914e-e99a-4220-9d63-3146e4062d38",
+      "name": "Teams",
+      "description": {
+        "content": "Organization team members and reviewers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e19a96c6-fed0-4523-97d6-e77473c2fcd0",
+          "name": "List team members",
+          "request": {
+            "name": "List team members",
+            "description": {
+              "content": "List the organization's team members (staff and reviewers).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                "team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72ad4a4b-ae2e-4f8f-93b5-1abf6de3d357",
+              "name": "A list of team members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"continuationToken\": \"string\",\n  \"totalCount\": 9020,\n  \"items\": [\n    {\n      \"userId\": \"618e5fae-5aa9-c834-bfe0-8e3ae76ec0c0\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"Y1K@wtDBCBVPSqfxoAgPWgaM.rpce\"\n    },\n    {\n      \"userId\": \"11c23a7c-ee93-9d3f-4ad7-c482ec5f4162\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"rUj3LsHh4hmfO6@YU.zfdt\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db093493-5a93-4030-9f5c-682be4bf67b3",
+              "name": "Authentication failed or was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://submittable-api.submittable.com/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6b995899-f688-40b9-a23d-3026bf773c02",
+    "name": "Submittable Assignments Teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Submittable API (v4) provides read-and-write, programmatic access to a Submittable account's data. Submittable is a submission management, grants, and applications platform. This API exposes submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. Authentication uses HTTP Basic Authentication, where an account access token (found under More > Integrations > API Access) is sent as the password portion of the Basic Auth header. The API is throttled at roughly 10 transactions per second and 10,000 transactions per hour. In v4, submission and label identifiers are GUIDs and list endpoints page with continuation tokens rather than page numbers.\nThis description is modeled from Submittable's public API reference and help documentation. Endpoint paths, parameters, and schemas are honestly modeled to reflect the documented resource groups; some request/response shapes are generalized where the underlying account-gated reference does not publish a machine-readable specification. Endpoints are marked endpointsModeled where exact shapes were not confirmable without an authenticated account.\n\nContact Support:\n Name: Submittable",
+      "type": "text/plain"
+    }
+  }
+}

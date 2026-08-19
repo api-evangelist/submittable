@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Submittable Assignments Submissions API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/submissions",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Filter submissions to a single project."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by submission status."
+              },
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query",
+                "description": "Token returned by a previous page to fetch the next page."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page."
+              }
+            ]
+          },
+          "docs": "List submissions in the account. Supports filtering (for example by project, status, label, or date range) and pagination via a continuation token."
+        },
+        {
+          "info": {
+            "name": "Get a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "The GUID of the submission."
+              }
+            ]
+          },
+          "docs": "Retrieve a single submission by its GUID."
+        },
+        {
+          "info": {
+            "name": "Update a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://submittable-api.submittable.com/v4/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "The GUID of the submission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update mutable fields on a submission, such as its status or labels."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

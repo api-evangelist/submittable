@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Submittable Assignments Messaging API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messaging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get message attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/messaging/:messageId/files",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the files attached to a message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Submittable Assignments Entries API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List form-field entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/entries",
+            "params": [
+              {
+                "name": "continuationToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List the form-field entries (answers) captured against submissions. In v4 these consolidate the legacy v3 requests/responses endpoints."
+        },
+        {
+          "info": {
+            "name": "Get an entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/entries/:entryId",
+            "params": [
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single form-field entry."
+        },
+        {
+          "info": {
+            "name": "Get entries for a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://submittable-api.submittable.com/v4/entries/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the form-field entries captured on a specific submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

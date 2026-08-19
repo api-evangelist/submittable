@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "5b45f3e5-58ca-4abe-9fbc-8d798d2785e6",
+      "name": "Assignments",
+      "description": {
+        "content": "Routing of submissions to reviewers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b871448-bb63-4680-8722-f7b23a7b3312",
+          "name": "Assign a submission to a reviewer",
+          "request": {
+            "name": "Assign a submission to a reviewer",
+            "description": {
+              "content": "Create a review assignment routing a submission to a team member for evaluation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                "team",
+                "assignment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"submissionId\": \"<uuid>\",\n  \"assigneeId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "025bf398-a15d-4e37-81c3-31d3d3ebd91e",
+              "name": "The created assignment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    "team",
+                    "assignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"submissionId\": \"<uuid>\",\n  \"assigneeId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assignmentId\": \"a4bdd0be-d062-fdd2-e7da-da72aabeb52c\",\n  \"submissionId\": \"a554d99a-04d1-a338-7662-02cf87e7eb88\",\n  \"assigneeId\": \"2cf3d45a-afc6-0b0e-4c2e-0d2c9e057e3c\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08b69f99-a54a-4590-98d9-3540c9032787",
+              "name": "Authentication failed or was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    "team",
+                    "assignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"submissionId\": \"<uuid>\",\n  \"assigneeId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://submittable-api.submittable.com/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "34755652-47dd-49fc-b20f-d87285e492a2",
+    "name": "Submittable Assignments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Submittable API (v4) provides read-and-write, programmatic access to a Submittable account's data. Submittable is a submission management, grants, and applications platform. This API exposes submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. Authentication uses HTTP Basic Authentication, where an account access token (found under More > Integrations > API Access) is sent as the password portion of the Basic Auth header. The API is throttled at roughly 10 transactions per second and 10,000 transactions per hour. In v4, submission and label identifiers are GUIDs and list endpoints page with continuation tokens rather than page numbers.\nThis description is modeled from Submittable's public API reference and help documentation. Endpoint paths, parameters, and schemas are honestly modeled to reflect the documented resource groups; some request/response shapes are generalized where the underlying account-gated reference does not publish a machine-readable specification. Endpoints are marked endpointsModeled where exact shapes were not confirmable without an authenticated account.\n\nContact Support:\n Name: Submittable",
+      "type": "text/plain"
+    }
+  }
+}

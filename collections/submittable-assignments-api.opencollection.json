@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Submittable Assignments API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Assign a submission to a reviewer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://submittable-api.submittable.com/v4/submissions/team/assignment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a review assignment routing a submission to a team member for evaluation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
