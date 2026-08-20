@@ -32,6 +32,14 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/submittabl
 tags:
 - Submission Management
 - Grants Management
+- Application
+- Forms
+- Non-Profit
+- Corporate Social Responsibility
+- Workflows
+tags_raw:
+- Submission Management
+- Grants Management
 - Applications
 - Forms
 - Nonprofit
@@ -167,6 +175,8 @@ apis:
   humanURL: https://submittable-api.submittable.com/docs/v4/index.html
   baseURL: https://submittable-api.submittable.com/v4
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -207,6 +217,8 @@ apis:
   humanURL: https://submittable-api.submittable.com/docs/v4/index.html
   baseURL: https://submittable-api.submittable.com/v4
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -227,6 +239,8 @@ apis:
   humanURL: https://submittable-api.submittable.com/docs/v4/index.html
   baseURL: https://submittable-api.submittable.com/v4
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
