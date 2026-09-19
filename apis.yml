@@ -107,6 +107,8 @@ apis:
   humanURL: https://submittable-api.submittable.com/docs/v4/index.html
   baseURL: https://submittable-api.submittable.com/v4
   tags:
+  - Fund
+  tags_raw:
   - Funds
   properties:
   - type: OpenAPI
