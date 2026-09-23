@@ -1,16 +1,7 @@
 {
   "provider": "submittable",
   "sources": [
-    "submittable-assignments-api-openapi.yml",
-    "submittable-entries-api-openapi.yml",
-    "submittable-funds-api-openapi.yml",
-    "submittable-labels-api-openapi.yml",
-    "submittable-messaging-api-openapi.yml",
-    "submittable-payments-api-openapi.yml",
-    "submittable-projects-api-openapi.yml",
-    "submittable-submissions-api-openapi.yml",
-    "submittable-teams-api-openapi.yml",
-    "submittable-users-api-openapi.yml"
+    "_original/submittable-openapi.yml"
   ],
   "outputs": [
     "submittable-assignments-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "submittable-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "submittable-assignments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-entries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-funds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-messaging-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-submissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "submittable-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
