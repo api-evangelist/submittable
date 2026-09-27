@@ -35,7 +35,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Fund:
+      type: object
+      properties:
+        fundId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        balance:
+          type: number
+        currency:
+          type: string
     FundList:
       allOf:
       - $ref: '#/components/schemas/Paged'
@@ -52,18 +71,6 @@ components:
           type: string
         message:
           type: string
-    Fund:
-      type: object
-      properties:
-        fundId:
-          type: string
-          format: uuid
-        name:
-          type: string
-        balance:
-          type: number
-        currency:
-          type: string
     Paged:
       type: object
       properties:
@@ -76,13 +83,6 @@ components:
           type:
           - integer
           - 'null'
-  responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

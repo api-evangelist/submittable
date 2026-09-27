@@ -42,20 +42,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Assignment:
-      type: object
-      properties:
-        assignmentId:
-          type: string
-          format: uuid
-        submissionId:
-          type: string
-          format: uuid
-        assigneeId:
-          type: string
-          format: uuid
-        status:
-          type: string
     Error:
       type: object
       properties:
@@ -75,6 +61,20 @@ components:
         assigneeId:
           type: string
           format: uuid
+    Assignment:
+      type: object
+      properties:
+        assignmentId:
+          type: string
+          format: uuid
+        submissionId:
+          type: string
+          format: uuid
+        assigneeId:
+          type: string
+          format: uuid
+        status:
+          type: string
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.

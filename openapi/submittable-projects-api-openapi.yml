@@ -118,13 +118,15 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
+    ProjectList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Project'
     Project:
       type: object
       properties:
@@ -138,6 +140,13 @@ components:
         formId:
           type: string
           format: uuid
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     ProjectCreate:
       type: object
       properties:
@@ -145,15 +154,6 @@ components:
           type: string
         status:
           type: string
-    ProjectList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Project'
     Paged:
       type: object
       properties:

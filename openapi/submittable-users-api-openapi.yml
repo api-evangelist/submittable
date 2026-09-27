@@ -80,13 +80,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     UserList:
       allOf:
       - $ref: '#/components/schemas/Paged'
@@ -109,6 +102,13 @@ components:
         email:
           type: string
           format: email
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Paged:
       type: object
       properties:

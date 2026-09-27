@@ -57,21 +57,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    LabelCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        color:
-          type: string
     Label:
       type: object
       properties:
         labelId:
           type: string
           format: uuid
+        name:
+          type: string
+        color:
+          type: string
+    LabelCreate:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
         color:
@@ -83,15 +83,6 @@ components:
           type: string
         message:
           type: string
-    LabelList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Label'
     Paged:
       type: object
       properties:
@@ -104,6 +95,15 @@ components:
           type:
           - integer
           - 'null'
+    LabelList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Label'
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.
