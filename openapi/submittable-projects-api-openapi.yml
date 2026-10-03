@@ -104,29 +104,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ProjectList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Project'
     Project:
       type: object
       properties:
@@ -140,19 +118,28 @@ components:
         formId:
           type: string
           format: uuid
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     ProjectCreate:
       type: object
       properties:
         name:
           type: string
         status:
+          type: string
+    ProjectList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Project'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
           type: string
     Paged:
       type: object
@@ -166,6 +153,19 @@ components:
           type:
           - integer
           - 'null'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

@@ -113,16 +113,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Label:
-      type: object
-      properties:
-        labelId:
-          type: string
-          format: uuid
-        name:
-          type: string
-        color:
-          type: string
     SubmissionList:
       allOf:
       - $ref: '#/components/schemas/Paged'
@@ -132,35 +122,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Submission'
-    SubmissionUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-        labelIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Submission:
       type: object
       properties:
@@ -184,13 +145,46 @@ components:
         submittedAt:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
+    SubmissionUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        labelIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+    Label:
+      type: object
+      properties:
+        labelId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        color:
+          type: string
   responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -199,6 +193,12 @@ components:
             $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded. The API allows roughly 10 transactions per second and 10,000 per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or was not provided.
       content:
         application/json:
           schema:

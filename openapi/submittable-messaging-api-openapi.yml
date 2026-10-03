@@ -45,14 +45,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed or was not provided.
       content:
         application/json:
           schema:
@@ -71,15 +71,6 @@ components:
           format: uri
         contentType:
           type: string
-    FileList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/File'
     Error:
       type: object
       properties:
@@ -99,6 +90,15 @@ components:
           type:
           - integer
           - 'null'
+    FileList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/File'
   securitySchemes:
     basicAuth:
       type: http
