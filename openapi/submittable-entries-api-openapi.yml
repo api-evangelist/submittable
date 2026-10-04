@@ -90,6 +90,47 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
+    Entry:
+      type: object
+      properties:
+        entryId:
+          type: string
+        submissionId:
+          type: string
+          format: uuid
+        fieldLabel:
+          type: string
+        value:
+          type: string
+    EntryList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Entry'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -103,47 +144,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Entry:
-      type: object
-      properties:
-        entryId:
-          type: string
-        submissionId:
-          type: string
-          format: uuid
-        fieldLabel:
-          type: string
-        value:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
-    EntryList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Entry'
   securitySchemes:
     basicAuth:
       type: http

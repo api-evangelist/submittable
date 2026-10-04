@@ -44,20 +44,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
     File:
       type: object
       properties:
@@ -71,25 +70,6 @@ components:
           format: uri
         contentType:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
     FileList:
       allOf:
       - $ref: '#/components/schemas/Paged'
@@ -99,6 +79,26 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/File'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

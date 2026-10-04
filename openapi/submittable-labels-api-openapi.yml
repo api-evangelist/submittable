@@ -66,12 +66,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Label'
-    Error:
+    LabelCreate:
       type: object
+      required:
+      - name
       properties:
-        error:
+        name:
           type: string
-        message:
+        color:
           type: string
     Paged:
       type: object
@@ -85,15 +87,6 @@ components:
           type:
           - integer
           - 'null'
-    LabelCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        color:
-          type: string
     Label:
       type: object
       properties:
@@ -103,6 +96,13 @@ components:
         name:
           type: string
         color:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
           type: string
   responses:
     Unauthorized:

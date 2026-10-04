@@ -112,16 +112,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded. The API allows roughly 10 transactions per second and 10,000 per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    SubmissionList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Submission'
     Submission:
       type: object
       properties:
@@ -145,13 +155,16 @@ components:
         submittedAt:
           type: string
           format: date-time
-    Error:
+    SubmissionUpdate:
       type: object
       properties:
-        error:
+        status:
           type: string
-        message:
-          type: string
+        labelIds:
+          type: array
+          items:
+            type: string
+            format: uuid
     Paged:
       type: object
       properties:
@@ -164,16 +177,6 @@ components:
           type:
           - integer
           - 'null'
-    SubmissionUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-        labelIds:
-          type: array
-          items:
-            type: string
-            format: uuid
     Label:
       type: object
       properties:
@@ -184,25 +187,22 @@ components:
           type: string
         color:
           type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded. The API allows roughly 10 transactions per second and 10,000 per hour.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    SubmissionList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Submission'
   securitySchemes:
     basicAuth:
       type: http

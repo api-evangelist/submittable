@@ -47,6 +47,27 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
+    PaymentList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Payment'
     Payment:
       type: object
       properties:
@@ -70,27 +91,6 @@ components:
           type: string
         message:
           type: string
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
-    PaymentList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Payment'
   responses:
     Unauthorized:
       description: Authentication failed or was not provided.
