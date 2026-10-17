@@ -56,6 +56,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     LabelList:
       allOf:
@@ -75,18 +82,6 @@ components:
           type: string
         color:
           type: string
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
     Label:
       type: object
       properties:
@@ -104,13 +99,18 @@ components:
           type: string
         message:
           type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or was not provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
   securitySchemes:
     basicAuth:
       type: http

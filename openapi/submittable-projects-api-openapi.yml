@@ -105,15 +105,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ProjectList:
-      allOf:
-      - $ref: '#/components/schemas/Paged'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Project'
     ProjectCreate:
       type: object
       properties:
@@ -121,18 +112,6 @@ components:
           type: string
         status:
           type: string
-    Paged:
-      type: object
-      properties:
-        continuationToken:
-          type:
-          - string
-          - 'null'
-          description: Token to pass on the next request to retrieve the next page.
-        totalCount:
-          type:
-          - integer
-          - 'null'
     Project:
       type: object
       properties:
@@ -146,6 +125,15 @@ components:
         formId:
           type: string
           format: uuid
+    ProjectList:
+      allOf:
+      - $ref: '#/components/schemas/Paged'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Project'
     Error:
       type: object
       properties:
@@ -153,15 +141,27 @@ components:
           type: string
         message:
           type: string
+    Paged:
+      type: object
+      properties:
+        continuationToken:
+          type:
+          - string
+          - 'null'
+          description: Token to pass on the next request to retrieve the next page.
+        totalCount:
+          type:
+          - integer
+          - 'null'
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed or was not provided.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or was not provided.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
