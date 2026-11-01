@@ -1,4 +1,4 @@
-# Submittable (submittable)
+# Submittable
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,110 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Submittable is a submission management, grants, and applications platform used by foundations, nonprofits, corporations, and governments to collect, review, and manage forms, applications, submissions, and awards. It exposes a real, documented **public REST API (v4)** at `https://submittable-api.submittable.com` with read-and-write access to account data — submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments.
+Submittable is a submission management, grants, and applications platform used by foundations, nonprofits, corporations, and governments to collect, review, and manage forms, applications, submissions, and awards. Its public REST API (v4, base https://submittable-api.submittable.com) provides read-and-write, programmatic access to account data - submissions and their form-field entries, projects and forms, submitters (users), labels, review team members and assignments, funds and payment distributions, and message attachments. The API uses HTTP Basic Authentication (an account access token sent as the password) and is throttled at roughly 10 transactions per second and 10,000 transactions per hour. API access is enabled per account under More > Integrations > API Access, and Submittable pricing is quote-based (bundled Grant/Application Management and Corporate Social Responsibility products, plus Enterprise) via contact-sales.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/submittable/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/submittable/refs/heads/main/apis.yml)
+**Areas:** Submission Management · Grants Management · Application · Forms · Non-Profit · Corporate Social Responsibility · Workflows
 
-## Access Model
+## Submittable on APIs.io
 
-The Submittable API is **real and documented, but account-gated**:
+Everything profiled for Submittable is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/submittable/](https://apis.io/providers/submittable/)** — or go straight to one of the APIs or properties below.
 
-- **You need a Submittable account.** API access is enabled per account under **More > Integrations > API Access**, which issues an access token.
-- **Authentication is HTTP Basic Auth.** The access token is sent as the **password** portion of the Basic Authentication header on every call.
-- **Current version is v4** (`/v4`), with legacy **v3** (`/v3`) still reachable. In v4, submission and label identifiers are **GUIDs**, list endpoints page with **continuation tokens**, and the old v3 `requests`/`responses` endpoints are consolidated into v4 **entries**.
-- **Rate limits:** roughly **10 transactions/second** and **10,000 transactions/hour**.
-- The interactive v4 reference is served as a JavaScript single-page app. Live probing confirms the surface exists — `GET https://submittable-api.submittable.com/v4/submissions` returns **HTTP 401** without credentials.
+### APIs (10)
 
-Because the reference is account-gated and Submittable does not publish a machine-readable OpenAPI, the OpenAPI in this repo is **honestly modeled** from the documented resource groups. Paths for submissions, entries, projects, organizations/team, and submissions/team/assignment are drawn from Submittable's public docs; the remaining paths are modeled to reflect the named resource groups and are marked **endpointsModeled** in `review.yml`.
+- [Submittable Assignments API](https://apis.io/apis/submittable/submittable-assignments-api/) — Routing of submissions to reviewers.
+- [Submittable Entries API](https://apis.io/apis/submittable/submittable-entries-api/) — Form-field responses captured on submissions.
+- [Submittable Funds API](https://apis.io/apis/submittable/submittable-funds-api/) — Budgets and grant distributions.
+- [Submittable Labels API](https://apis.io/apis/submittable/submittable-labels-api/) — Tags used to categorize submissions.
+- [Submittable Messaging API](https://apis.io/apis/submittable/submittable-messaging-api/) — Message attachments.
+- [Submittable Payments API](https://apis.io/apis/submittable/submittable-payments-api/) — Payment records.
+- [Submittable Projects API](https://apis.io/apis/submittable/submittable-projects-api/) — The forms/programs people apply through.
+- [Submittable Submissions API](https://apis.io/apis/submittable/submittable-submissions-api/) — Applications and entries sent to your projects.
+- [Submittable Teams API](https://apis.io/apis/submittable/submittable-teams-api/) — Organization team members and reviewers.
+- [Submittable Users API](https://apis.io/apis/submittable/submittable-users-api/) — Submitters - the people who send submissions.
 
-## Tags
+### Published properties
 
-- Submission Management
-- Grants Management
-- Applications
-- Forms
-- Nonprofit
-- Corporate Social Responsibility
-- Workflow
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Submittable Agentic Access](https://apis.io/agentic-access/submittable/submittable-agentic-access/)
 
-### Submittable Submissions API
+#### Collections (11)
 
-List, retrieve, and update submissions — the applications and entries people send to your projects. Filter by project, status, label, or date; page with continuation tokens; read status, labels, assignments, and history.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
+- [Submittable API (v4)](https://apis.io/collections/submittable/open-submittable/)
+- [Submittable Assignments API](https://apis.io/collections/submittable/open-submittable-assignments-api/)
+- [Submittable Assignments Entries API](https://apis.io/collections/submittable/open-submittable-entries-api/)
+- [Submittable Assignments Funds API](https://apis.io/collections/submittable/open-submittable-funds-api/)
+- [Submittable Assignments Labels API](https://apis.io/collections/submittable/open-submittable-labels-api/)
+- [Submittable Assignments Messaging API](https://apis.io/collections/submittable/open-submittable-messaging-api/)
+- [Submittable Assignments Payments API](https://apis.io/collections/submittable/open-submittable-payments-api/)
+- [Submittable Assignments Projects API](https://apis.io/collections/submittable/open-submittable-projects-api/)
+- [Submittable Assignments Submissions API](https://apis.io/collections/submittable/open-submittable-submissions-api/)
+- [Submittable Assignments Teams API](https://apis.io/collections/submittable/open-submittable-teams-api/)
+- [Submittable Assignments Users API](https://apis.io/collections/submittable/open-submittable-users-api/)
 
-### Submittable Entries API
+#### Security (3)
 
-Read the form-field entries (answers) captured on submissions. In v4 the legacy v3 requests/responses endpoints are consolidated into the entries endpoints.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://submittable.help/en/articles/8563401-api-version-reference](https://submittable.help/en/articles/8563401-api-version-reference)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
+- [Submittable Authentication](https://apis.io/security/submittable/submittable-authentication/)
+- [Submittable Domain Security](https://apis.io/security/submittable/submittable-domain-security/)
+- [Submittable Trust Center](https://apis.io/security/submittable/submittable-trust-center/)
 
-### Submittable Projects and Forms API
+#### Plans and pricing (1)
 
-List, create, duplicate, and modify projects (the forms people apply through) and manage form types.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
+- [Submittable Plans Pricing](https://apis.io/plans/submittable/submittable-plans-pricing/)
 
-### Submittable Users (Submitters) API
+#### Rate limits (1)
 
-Retrieve submitter information — the people who create accounts and send submissions to your projects.
+Published request limits.
 
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
+- [Submittable Rate Limits](https://apis.io/rate-limits/submittable/submittable-rate-limits/)
 
-### Submittable Teams and Reviews API
+#### FinOps (1)
 
-Administer organization team members and assign submissions to reviewers for evaluation.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
+- [Submittable Finops](https://apis.io/finops/submittable/submittable-finops/)
 
-### Submittable Labels API
+## Where to find this API
 
-Create and organize labels (tags) used to categorize and filter submissions.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
-
-### Submittable Funds and Payments API
-
-Manage funds (budgets and grant distributions) and retrieve payment records filterable by period.
-
-- **Human URL:** [https://submittable-api.submittable.com/docs/v4/index.html](https://submittable-api.submittable.com/docs/v4/index.html)
-- **Base URL:** `https://submittable-api.submittable.com/v4`
-
-## Artifacts
-
-- [OpenAPI](openapi/submittable-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/submittable.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/submittable.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Plans](plans/submittable-plans-pricing.yml)
-- [Rate Limits](rate-limits/submittable-rate-limits.yml)
-- [Fin Ops](finops/submittable-finops.yml)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/submittable)
 - [Website](https://www.submittable.com)
 - [Documentation](https://submittable-api.submittable.com/docs/v4/index.html)
-- [Support Documentation](https://submittable.help/en/collections/1728753-integrations-api)
 - [Pricing](https://www.submittable.com/pricing/)
+- [Blog](https://www.submittable.com/blog)
 
-## Pricing
+## API Evangelist rating
 
-Submittable pricing is **quote-based** (contact sales). It is organized around bundleable products — Grant and Application Management and a Corporate Social Responsibility (CSR) platform — plus an **Enterprise** offering. No public per-seat list price is published; API access is included with the platform (not billed as a separate metered product) and governed by the transaction rate limits above.
+**Kin Score 31.2** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 26.3 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/submittable/](https://apis.io/providers/submittable/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Submittable: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/submittable/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
